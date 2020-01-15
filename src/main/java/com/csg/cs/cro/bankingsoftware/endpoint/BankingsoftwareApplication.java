@@ -14,6 +14,9 @@ public class BankingsoftwareApplication extends Application{
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
         h.add( HelloWorld.class );
+        h.add( CustomerEndpoint.class );
+        h.add( AccountEndpoint.class );
+        h.add( TransactionEndpoint.class );
         return h;
     }
 }

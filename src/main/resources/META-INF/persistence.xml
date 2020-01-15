@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+    <persistence-unit name="bankingsoftware" transaction-type="RESOURCE_LOCAL">
+        <description>Hibernate EntityManager</description>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <class>com.csg.cs.cro.bankingsoftware.model.AccountEntity</class>
+        <class>com.csg.cs.cro.bankingsoftware.model.TransactionRecordEntity</class>
+        <class>com.csg.cs.cro.bankingsoftware.model.CustomerEntity</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/bank"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="1234"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="show_sql" value="true"/>
+            <property name="hibernate.transaction.manager_lookup_class"
+                      value="org.hibernate.transaction.SunONETransactionManagerLookup"/>
+        </properties>
+    </persistence-unit>
+</persistence>
