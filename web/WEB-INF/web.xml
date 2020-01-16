@@ -3,6 +3,17 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
+    <filter-mapping>
+        <filter-name>CORSResponseFilter</filter-name> <!-- mandatory -->
+        <url-pattern>/*</url-pattern> <!-- either url-pattern or servlet-name is mandatory -->
+        <servlet-name>Jersey REST Service</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>CORSResponseFilter</filter-name> <!-- mandatory -->
+        <filter-class>com.csg.cs.cro.bankingsoftware.filter.CORSResponseFilter</filter-class> <!-- mandatory -->
+    </filter>
 
     <servlet>
         <servlet-name>Jersey REST Service</servlet-name>
