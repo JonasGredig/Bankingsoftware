@@ -1,6 +1,7 @@
 package com.csg.cs.cro.bankingsoftware.endpoint;
 
 import com.csg.cs.cro.bankingsoftware.controller.AccountController;
+import com.csg.cs.cro.bankingsoftware.dto.Account;
 import com.csg.cs.cro.bankingsoftware.model.AccountEntity;
 
 import javax.ws.rs.GET;
@@ -22,7 +23,7 @@ public class AccountEndpoint {
     @GET
     @Path("/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<AccountEntity> getCustomers(@PathParam("customerId") int customerId) {
+    public List<Account> getCustomers(@PathParam("customerId") int customerId) {
 
         return accountController.getAccounts(customerId);
     }
