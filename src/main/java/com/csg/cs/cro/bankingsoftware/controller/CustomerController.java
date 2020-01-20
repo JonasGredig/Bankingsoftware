@@ -15,4 +15,7 @@ public class CustomerController {
         return customerRepository.getCustomers();
     }
 
+    public CustomerEntity getCustomer(int customerId) {
+        return customerRepository.getCustomer(customerId);
+    }
 }

@@ -2,8 +2,6 @@ package com.csg.cs.cro.bankingsoftware.endpoint;
 
 import com.csg.cs.cro.bankingsoftware.controller.TransactionController;
 import com.csg.cs.cro.bankingsoftware.dto.Transaction;
-import com.csg.cs.cro.bankingsoftware.model.TransactionRecordEntity;
-import com.google.gson.Gson;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -36,9 +34,9 @@ public class TransactionEndpoint {
     @POST
     @Path("/new")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    public String newTransaction(Transaction transaction) {
-        return transactionController.newTransaction(transaction)+"";
+    @Produces(MediaType.APPLICATION_JSON)
+    public Transaction newTransaction(Transaction transaction) {
+        return transactionController.newTransaction(transaction);
 
     }
 

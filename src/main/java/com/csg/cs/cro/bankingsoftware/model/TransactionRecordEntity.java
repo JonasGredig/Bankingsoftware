@@ -14,6 +14,7 @@ public class TransactionRecordEntity {
     private String text;
     private BigDecimal amount;
     private Timestamp transactionTime;
+    private Integer accountId;
 
     public TransactionRecordEntity() {
 
@@ -24,7 +25,8 @@ public class TransactionRecordEntity {
         this.type=transaction.getType();
         this.text= transaction.getText();
         this.amount= transaction.getAmount();
-        this.transactionTime= transaction.getTransactionTime();
+        this.transactionTime = transaction.getTransactionTime();
+        this.accountId = transaction.getAccountId();
     }
 
     @Id
@@ -75,6 +77,16 @@ public class TransactionRecordEntity {
 
     public void setTransactionTime(Timestamp transactionTime) {
         this.transactionTime = transactionTime;
+    }
+
+    @Basic
+    @Column(name = "ACCOUNT_ID")
+    public Integer getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
     @Override

@@ -8,12 +8,14 @@ import java.io.IOException;
 public class CORSResponseFilter
         implements Filter {
 
+    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         // invoked when an instance of this filter is created by the container
         // used to initialize resources, read parameters...
 
     }
 
+    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
@@ -22,6 +24,7 @@ public class CORSResponseFilter
         // Authorize (allow) all domains to consume the content
         ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "*");
         ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD, PUT, POST");
+        ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
 
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
@@ -37,6 +40,7 @@ public class CORSResponseFilter
 
     }
 
+    @Override
     public void destroy() {
         // invoked when the filter instance is being destroyed by the container
         // used clean up resources
