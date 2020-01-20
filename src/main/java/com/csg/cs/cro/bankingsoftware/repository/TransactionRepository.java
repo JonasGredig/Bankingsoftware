@@ -13,10 +13,27 @@ public class TransactionRepository implements ITransactionRepository {
     private EntityManager em = Persistence.createEntityManagerFactory("bankingsoftware").createEntityManager();
 
     public boolean createTransaction(TransactionRecordEntity transaction) {
+        transaction.setId(0);
         if (transaction != null) {
             em.getTransaction().begin();
             em.merge(transaction);
             em.getTransaction().commit();
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean createTransactions(TransactionRecordEntity transaction1, TransactionRecordEntity transaction2) {
+        transaction1.setId(0);
+        transaction2.setId(0);
+        if (transaction1 != null && transaction2 != null) {
+            em.getTransaction().begin();
+            em.merge(transaction1);
+            em.merge(transaction2);
+            em.getTransaction().commit();
+
             return true;
         } else {
             return false;

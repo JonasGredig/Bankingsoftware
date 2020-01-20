@@ -17,30 +17,38 @@ public class TransactionController {
     private AccountRepository accountRepository = new AccountRepository();
 
     public Transaction newTransaction(Transaction transaction) {
-        AccountEntity accountEntityUser = accountRepository.getAccount(transactionRepository.getAccountId(transaction.getIban()));
+        AccountEntity accountEntity = accountRepository.getAccount(transactionRepository.getAccountId(transaction.getIban()));
 
         transaction.setTransactionTime(new Timestamp(System.currentTimeMillis()));
         TransactionRecordEntity transactionRecordEntity = new TransactionRecordEntity(transaction);
-        transactionRecordEntity.setAccountId(accountEntityUser.getId());
+        transactionRecordEntity.setAccountId(accountEntity.getId());
 
         if (transaction.getType().equals(TransactionType.DEPOSIT)) {
 
-            accountRepository.updateBalance(transaction.getAccountId(), accountEntityUser.getBalance().add(transaction.getAmount()));
+            accountRepository.updateBalance(accountEntity.getId(), accountEntity.getBalance().add(transaction.getAmount()));
+            transactionRepository.createTransaction(transactionRecordEntity);
 
         } else if (transaction.getType().equals(TransactionType.WITHDRAW)) {
 
-            accountRepository.updateBalance(transaction.getAccountId(), accountEntityUser.getBalance().subtract(transaction.getAmount()));
+            accountRepository.updateBalance(accountEntity.getId(), accountEntity.getBalance().subtract(transaction.getAmount()));
+            transactionRepository.createTransaction(transactionRecordEntity);
 
         } else if (transaction.getType().equals(TransactionType.TRANSFER)) {
 
-            AccountEntity accountEntityTo = accountRepository.getAccount(transactionRepository.getAccountId(transaction.getIbanTo()));
-            accountRepository.updateBalance(transaction.getAccountId(), accountEntityUser.getBalance().subtract(transaction.getAmount()));
-            accountRepository.updateBalance(transaction.getAccountId(), accountEntityTo.getBalance().add(transaction.getAmount()));
+            Integer accountId = transactionRepository.getAccountId(transaction.getIban());
+            Integer toAccountId = transactionRepository.getAccountId(transaction.getIbanTo());
+            AccountEntity toAccountEntity = accountRepository.getAccount(toAccountId);
+
+            accountRepository.updateBalance(accountId, accountEntity.getBalance().subtract(transaction.getAmount()));
+            accountRepository.updateBalance(toAccountId, toAccountEntity.getBalance().add(transaction.getAmount()));
+
+            TransactionRecordEntity outTransactionRecordEntity = transactionRecordEntity;
+            transactionRepository.createTransactions(transactionRecordEntity, outTransactionRecordEntity);
 
         } else {
             throw new RuntimeException("Unbekanner Type");
         }
-        transactionRepository.createTransaction(transactionRecordEntity);
+
         return transaction;
     }
 }
