@@ -23,7 +23,7 @@ public class AccountEndpoint {
     @GET
     @Path("/{customerId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Account> getCustomers(@PathParam("customerId") int customerId) {
+    public List<Account> getAccounts(@PathParam("customerId") int customerId) {
 
         return accountController.getAccounts(customerId);
     }

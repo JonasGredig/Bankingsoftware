@@ -15,7 +15,9 @@ public class AccountController {
     public List<Account> getAccounts(int customerId) {
         ArrayList<Account> accounts = new ArrayList<Account>();
         for (AccountEntity accountEntity : accountRepository.getAccounts(customerId)) {
-            accounts.add(new Account(accountEntity));
+            if (accountEntity.getCustomerId() == customerId) {
+                accounts.add(new Account(accountEntity));
+            }
         }
         return accounts;
     }

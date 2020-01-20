@@ -10,6 +10,7 @@ public class AccountEntity {
     private String iban;
     private BigDecimal balance;
     private BigDecimal overdraft;
+    private Integer customerId;
 
     @Id
     @Column(name = "ID")
@@ -49,6 +50,16 @@ public class AccountEntity {
 
     public void setOverdraft(BigDecimal overdraft) {
         this.overdraft = overdraft;
+    }
+
+    @Basic
+    @Column(name = "CUSTOMER_ID")
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     @Override
