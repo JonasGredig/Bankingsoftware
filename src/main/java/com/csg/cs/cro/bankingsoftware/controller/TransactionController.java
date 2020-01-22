@@ -1,6 +1,6 @@
 package com.csg.cs.cro.bankingsoftware.controller;
 
-import com.csg.cs.cro.bankingsoftware.TransactionType;
+import com.csg.cs.cro.bankingsoftware.model.TransactionType;
 import com.csg.cs.cro.bankingsoftware.dto.Transaction;
 import com.csg.cs.cro.bankingsoftware.model.AccountEntity;
 import com.csg.cs.cro.bankingsoftware.model.TransactionRecordEntity;

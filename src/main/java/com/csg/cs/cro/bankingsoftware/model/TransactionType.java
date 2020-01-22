@@ -1,4 +1,4 @@
-package com.csg.cs.cro.bankingsoftware;
+package com.csg.cs.cro.bankingsoftware.model;
 
 public class TransactionType {
 
